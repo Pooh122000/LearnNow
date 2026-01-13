@@ -1,0 +1,81 @@
+What is a locator?
+
+A way to find elements on the page
+Like a GPS coordinate for web elements
+
+Different selector types:
+python# By ID
+page.locator("#username")
+
+# By class
+page.locator(".card-body")
+
+# By text content
+page.locator("text=Elements")
+
+# By CSS selector
+page.locator("img[src='/images/Toolsqa.jpg']")
+
+# By XPath
+page.locator("//button[@id='submit']")
+
+Element State Checks
+pythonbanner.is_visible()     # Is element visible?
+banner.is_enabled()     # Is element enabled (not disabled)?
+banner.is_checked()     # Is checkbox/radio checked?
+Returns: True or False
+
+Counting Elements
+pythoncards = page.locator(".card-body")
+card_count = cards.count()  # Returns number of matching elements
+
+---
+pytest tests/test_homepage.py -v -s
+```
+
+**New flag: `-s`**
+- Shows print statements in output
+- Useful for debugging
+
+--------------------------------------------------------------
+📝 Interview Questions You Can Now Answer
+Q: What is sync_playwright and why do we use it?
+A:
+"sync_playwright is the synchronous API of Playwright for Python. We use it because:
+
+Easier to understand for beginners (sequential execution)
+Sufficient for most test automation needs
+No need to deal with async/await keywords
+Alternative is async_playwright which uses Python's asyncio for concurrent operations"
+
+
+Q: What is Playwright's auto-waiting feature?
+A:
+"Playwright automatically waits for elements before interacting with them. It checks if elements are:
+
+Attached to DOM
+Visible on screen
+Stable (not animating)
+Enabled (not disabled)
+Not covered by other elements
+
+Default timeout is 30 seconds. This eliminates most flaky tests caused by timing issues in Selenium."
+
+Q: How do you locate elements in Playwright?
+A:
+"Playwright uses page.locator() with various selectors:
+
+Text: page.locator('text=Login')
+CSS: page.locator('#username') or page.locator('.card-body')
+XPath: page.locator('//button[@id="submit"]')
+Attribute: page.locator('[data-testid="login-btn"]')
+
+Playwright's locators are lazy - they're evaluated when action is performed, making them more reliable than Selenium's immediate element finding."
+
+Q: What's the difference between headless and headed mode?
+A:
+"- Headed (headless=False): Browser window is visible. Used for local development and debugging.
+
+Headless (headless=True): Browser runs in background without UI. Used for CI/CD pipelines for faster execution and lower resource usage.
+
+We test in both modes to catch issues that might only appear in one mode."

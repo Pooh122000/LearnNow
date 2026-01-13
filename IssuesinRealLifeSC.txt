@@ -1,0 +1,31 @@
+🚨 Common Mistakes & Real-Life Issues
+Issue 1: Test file not discovered
+Symptom: pytest finds 0 tests
+Cause: File doesn't start with test_
+Fix: Rename file to test_*.py
+
+Issue 2: Function not discovered
+Symptom: pytest skips your test
+Cause: Function doesn't start with test_
+Fix:
+pythondef test_login():      # ✅ Correct
+def verify_login():    # ❌ Won't run
+
+Issue 3: Browser doesn't close
+Cause: Test crashes before browser.close()
+Fix: Use context manager (we already do this!)
+pythonwith sync_playwright() as playwright:
+    # Even if error occurs, resources cleanup automatically ✅
+
+Issue 4: Element not found
+Symptom: TimeoutError: Timeout 30000ms exceeded
+Cause: Wrong selector or element doesn't exist
+Debug:
+python# Pause test to inspect page
+page.pause()  # Opens Playwright Inspector
+
+Issue 5: Test works locally but fails in CI
+Cause: Headless mode behaves differently
+Fix: Always test with both:
+pythonheadless=False  # Local testing
+headless=True   # CI/CD testing
