@@ -1,0 +1,93 @@
+What is Playwright?
+Quick Overview:
+
+Playwright is a modern browser automation tool by Microsoft
+Supports Chromium, Firefox, and WebKit (Safari engine)
+Works across Windows, Linux, macOS
+Better than Selenium in many ways (we'll see how)
+
+Why Companies Use Playwright:
+
+✅ Auto-waits for elements (reduces flaky tests)
+✅ Fast execution
+✅ Built-in screenshot, video recording
+✅ Network interception (mock APIs)
+✅ Multiple browser contexts (parallel isolated tests)
+✅ Modern JavaScript app support
+
+-------
+
+Why requirements.txt?
+Real scenario: You write automation code on your machine. Your teammate clones the project. How do they install the exact same packages?
+Answer: requirements.txt
+It's a file that lists all Python packages and their versions.
+---
+
+## 📝 Interview Questions You Can Now Answer
+
+**Q: What are the three levels in Playwright architecture?**
+
+**A:** 
+1. **Browser** - The top-level browser instance (expensive to create)
+2. **Context** - An isolated browsing session, like incognito mode (lightweight, used for parallel testing)
+3. **Page** - A single browser tab where we perform automation actions
+
+---
+
+**Q: What is the advantage of Browser Context in Playwright?**
+
+**A:** Browser contexts allow us to create isolated, independent browsing sessions within a single browser instance. This enables:
+- Running multiple tests in parallel without interference
+- Testing different user scenarios simultaneously (admin vs regular user)
+- Better resource utilization (one browser, multiple contexts)
+- Avoiding cookie/cache conflicts between tests
+
+---
+
+**Q: Why is Playwright better than Selenium for handling flaky tests?**
+
+**A:** Playwright has built-in auto-waiting mechanisms. It automatically waits for elements to be:
+- Attached to DOM
+- Visible
+- Stable (not animating)
+- Enabled
+- Ready for interaction
+
+This eliminates most manual wait logic that causes flakiness in Selenium tests.
+
+---
+Professional Approach:
+LearnNow/
+│
+├── tests/              # All test files
+├── pages/              # Page Object Model classes
+├── utils/              # Helper functions (screenshot, date, etc.)
+├── test_data/          # Test data (JSON, CSV, Excel)
+├── reports/            # Test execution reports
+├── screenshots/        # Failure screenshots
+├── requirements.txt    # Python dependencies
+├── pytest.ini          # Pytest configuration
+├── .gitignore         # Files to ignore in Git
+├── README.md          # Project documentation
+└── venv/              # Virtual environment (already exists)
+
+----
+**Purpose:** Contains Page Object Model (POM) classes
+
+**What is POM?** We'll learn futher, but quick overview:
+- Each web page = One Python class
+- Contains all locators and actions for that page
+- Makes tests clean and reusable
+
+**Example files:**
+```
+pages/
+├── base_page.py        # Common methods (all pages inherit)
+├── login_page.py       # Login page locators & methods
+├── home_page.py        # Home page locators & methods
+└── forms_page.py       # Forms page locators & methods
+```
+
+**Real scenario:**
+- Login button selector changes? → Fix in ONE place (login_page.py)
+- No need to update 50 test files!

@@ -1,0 +1,23 @@
+Let's verify Playwright works with a quick command:
+bash
+playwright codegen https://demoqa.com
+
+What this does:
+
+codegen = Code Generator
+Opens a Chromium browser
+Opens Playwright Inspector
+You can click on the page, and Playwright writes code for you!
+
+Expected result:
+
+Browser opens with demoqa.com
+A separate "Playwright Inspector" window appears
+
+Try this:
+
+In the browser, click on "Elements" card
+Watch the Inspector window - it generates code automatically!
+Close everything when done
+
+This is a POWERFUL feature for beginners!
