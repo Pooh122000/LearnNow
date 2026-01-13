@@ -1,0 +1,7 @@
+[33m3055e97[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Merge: Resolve workflow conflict, keep enhanced version with debugging
+[33mc75dff4[m Fix: resolved the pytest error and removed the token from instruction file
+[33m4fd8504[m[33m ([m[1;31morigin/main[m[33m)[m Resolve pytest command not found error
+[33m7b37d94[m Created the yml file
+[33m1b2b60e[m Add GitHub Actions workflow for Playwright tests
+[33m08bb35e[m Fix: Resolved strict mode violation in test_elements_page - use .first for header-text locator
+[33m98f2906[m Initial commit: Playwright automation project setup
