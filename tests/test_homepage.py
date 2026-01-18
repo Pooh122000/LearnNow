@@ -3,6 +3,7 @@ Test Suite: Homepage Tests
 Description: Tests using Page Object Model pattern
 """
 import pytest
+import os
 from pages.home_page import HomePage
 
 def test_verify_homepage_elements(page):
@@ -95,8 +96,8 @@ def test_navigate_to_elements_page(page):
     print("✅ Test completed successfully!\n")
 
 @pytest.mark.skipif(
-    pytest.browser == "webkit",
-    reason="WebKit is flaky for demoqa.com in CI"
+    os.getenv("PLAYWRIGHT_BROWSER") == "webkit",
+    reason="Skipping flaky test on WebKit in CI"
 )
 def test_debug_elements_page(page):
     """Debug test to find the correct header selector"""
