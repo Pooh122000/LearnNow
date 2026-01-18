@@ -13,7 +13,7 @@ def test_python_built_in_assertions():
     """
     
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True, slow_mo=300)
+        
         context = browser.new_context()
         page = context.new_page()
         

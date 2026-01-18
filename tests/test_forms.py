@@ -12,7 +12,6 @@ def test_fill_practice_form():
     """
     
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False, slow_mo=500)
         context = browser.new_context()
         page = context.new_page()
         
