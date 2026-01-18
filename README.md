@@ -1,5 +1,8 @@
 # LearnNow - Playwright Automation Framework
 
+
+[![Playwright Tests](https://github.com/Pooh122000/LearnNow/actions/workflows/playwright-tests.yml/badge.svg)](https://github.com/Pooh122000/LearnNow/actions/workflows/playwright-tests.yml)
+
 ## 📋 Project Overview
 This is a Playwright-based test automation framework for testing [DemoQA](https://demoqa.com).
 
