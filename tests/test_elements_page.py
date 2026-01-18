@@ -5,8 +5,9 @@ def test_navigate_to_elements_page():
     """Test navigation to Elements page"""
     
     with sync_playwright() as playwright:
-        context = browser.new_context()
-        page = context.new_page()
+        def test_robust_automation(browser):
+            context = browser.new_context()
+            page = context.new_page()
         
         # 1. Go to homepage
         page.goto("https://demoqa.com")

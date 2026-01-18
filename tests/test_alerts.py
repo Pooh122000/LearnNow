@@ -12,8 +12,9 @@ def test_handle_javascript_alert():
     """
     
     with sync_playwright() as playwright:
-        context = browser.new_context()
-        page = context.new_page()
+        def test_robust_automation(browser):
+            context = browser.new_context()
+            page = context.new_page()
         
         print("\n🧪 Testing Alert Handling")
         

@@ -1,8 +1,9 @@
 import re
 from playwright.sync_api import sync_playwright, expect
 with sync_playwright() as playwright:
-    context = browser.new_context()
-    page = context.new_page()
+    def test_robust_automation(browser):
+        context = browser.new_context()
+        page = context.new_page()
     
     print("\n🧪 Starting Robust Text Box Test")
     
