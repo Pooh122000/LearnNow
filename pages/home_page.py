@@ -48,5 +48,13 @@ class HomePage:
         return self.page.locator(self.cards).count()
     
     def click_elements_card(self):
-        """Click on Elements card"""
-        self.page.locator(self.elements_card).click()
+        card = self.page.locator(self.elements_card)
+
+        # Ensure card exists & is visible
+        expect(card).to_be_visible(timeout=10000)
+
+        # Scroll into view (CRITICAL in headless CI)
+        card.scroll_into_view_if_needed()
+
+        # Click with force to bypass overlays/animations
+        card.click(force=True)
