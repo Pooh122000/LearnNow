@@ -25,7 +25,8 @@ class HomePage:
     
     def open(self):
         """Navigate to homepage"""
-        self.page.goto(self.url)
+        self.page.goto(self.url, wait_until="domcontentloaded", timeout=60000)
+        self.page.locator("div.home-banner").wait_for(state="visible", timeout=15000)
     
     def get_title(self):
         """Get page title"""

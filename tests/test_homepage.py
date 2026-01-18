@@ -94,7 +94,10 @@ def test_navigate_to_elements_page(page):
     # Cleanup
     print("✅ Test completed successfully!\n")
 
-
+@pytest.mark.skipif(
+    pytest.browser == "webkit",
+    reason="WebKit is flaky for demoqa.com in CI"
+)
 def test_debug_elements_page(page):
     """Debug test to find the correct header selector"""
     

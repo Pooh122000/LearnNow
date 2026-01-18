@@ -116,18 +116,24 @@ def test_handle_new_window(page):
         
 #Scenario 3: Handling Iframes
 def test_handle_iframe(page):
-    """
-    Test: Interact with elements inside iframe
-    """
-        
     print("\n🧪 Testing Iframe Handling")
-    
-    page.goto("https://demoqa.com/frames")
-    
-    # Method 1: Using frame locator
+
+    page.goto(
+        "https://demoqa.com/frames",
+        wait_until="domcontentloaded",
+        timeout=60000
+    )
+
     frame = page.frame_locator("#frame1")
-    heading = frame.locator("#sampleHeading").text_content()
-    print(f"✅ Iframe heading: {heading}")
+
+    heading = frame.locator("#sampleHeading")
+    heading.wait_for(timeout=15000)
+
+    text = heading.text_content()
+    print(f"✅ Iframe heading: {text}")
+
+    assert text == "This is a sample page"
+
     
     # Method 2: Using frame selector
     # iframe_element = page.frame(name="frame1")
