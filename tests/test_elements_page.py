@@ -5,7 +5,6 @@ def test_navigate_to_elements_page():
     """Test navigation to Elements page"""
     
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
         context = browser.new_context()
         page = context.new_page()
         
