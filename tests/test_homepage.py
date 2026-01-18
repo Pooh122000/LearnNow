@@ -16,9 +16,10 @@ def test_verify_homepage_elements():
     # Start Playwright
     with sync_playwright() as playwright:
         # Browser setup
-        context = browser.new_context()
-        page = context.new_page()
-        
+        def test_robust_automation(browser):
+            context = browser.new_context()
+            page = context.new_page()
+            
         # Create page object
         home_page = HomePage(page)
         

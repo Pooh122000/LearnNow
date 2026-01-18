@@ -12,8 +12,9 @@ def test_fill_practice_form():
     """
     
     with sync_playwright() as playwright:
-        context = browser.new_context()
-        page = context.new_page()
+        def test_robust_automation(browser):
+            context = browser.new_context()
+            page = context.new_page()
         
         # Create page object
         forms_page = FormsPage(page)

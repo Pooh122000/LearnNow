@@ -14,8 +14,9 @@ def test_python_built_in_assertions():
     
     with sync_playwright() as playwright:
         
-        context = browser.new_context()
-        page = context.new_page()
+        def test_robust_automation(browser):
+            context = browser.new_context()
+            page = context.new_page()
         
         home_page = HomePage(page)
         
