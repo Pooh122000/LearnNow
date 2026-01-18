@@ -1,8 +1,6 @@
 """
 Test Suite: Forms Page Tests
 """
-
-from playwright.sync_api import sync_playwright
 from pages.forms_page import FormsPage
 
 
@@ -11,10 +9,8 @@ def test_fill_practice_form():
     Test: Fill and submit practice form
     """
     
-    with sync_playwright() as playwright:
-        def test_robust_automation(browser):
-            context = browser.new_context()
-            page = context.new_page()
+    def test_robust_automation(page):
+        print("\n🧪 Starting Robust Text Box Test")
         
         # Create page object
         forms_page = FormsPage(page)

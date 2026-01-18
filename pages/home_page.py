@@ -8,7 +8,12 @@ from playwright.sync_api import Page
 
 class HomePage:
     """Page Object for DemoQA Homepage"""
-    
+    URL = "https://demoqa.com/"
+
+    BANNER_IMAGE = ".home-banner"
+    ELEMENTS_CARD = "div.card-body h5:has-text('Elements')"
+    ALL_CARDS = "div.card"
+
     def __init__(self, page: Page):
         self.page = page
         self.url = "https://demoqa.com/"
