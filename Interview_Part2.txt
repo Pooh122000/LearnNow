@@ -79,3 +79,135 @@ A:
 Headless (headless=True): Browser runs in background without UI. Used for CI/CD pipelines for faster execution and lower resource usage.
 
 We test in both modes to catch issues that might only appear in one mode."
+
+
+-----
+What is Page Object Model (POM)?
+Definition:
+Page Object Model is a design pattern where each web page is represented as a Python class.
+Key Principles:
+
+One page = One class
+Locators stored in class attributes
+Page actions as methods
+Tests only call methods (no direct locators)
+
+
+Real-World Analogy:
+Think of a TV Remote Control:
+Without POM (Bad):
+python# You have to know internal circuits
+press_button_at_position(x=10, y=20)
+activate_infrared_led(frequency=38kHz)
+send_binary_code("0101010101")
+With POM (Good):
+python# Simple, readable methods
+remote.volume_up()
+remote.change_channel(5)
+remote.power_off()
+```
+---
+
+ Interview Questions You Can Now Answer
+Q: What is Page Object Model and why do we use it?
+A:
+"Page Object Model is a design pattern where each web page is represented as a Python class. We use it because:
+
+Maintainability: Locators are stored in one place. If a selector changes, we update only the page class, not 50 test files.
+Reusability: Page methods can be reused across multiple tests.
+Readability: Tests use descriptive method names like login_page.click_submit() instead of cryptic selectors.
+Separation of concerns: Page classes handle page interactions, test classes handle business logic and assertions.
+Team collaboration: Developers can work on page classes while QA works on tests without conflicts."
+
+
+Q: What is the difference between locators and methods in a page class?
+A:
+"- Locators are class attributes (constants) that store element selectors. They're defined at the top in UPPERCASE.
+
+Methods are functions that perform actions on those elements (click, fill, verify).
+
+For example:
+python# Locator (what to find)
+LOGIN_BUTTON = '#submit'
+
+# Method (what to do with it)
+def click_login(self):
+    self.click_element(self.LOGIN_BUTTON)
+This separation makes it easy to update selectors without touching method logic."
+
+Q: What should go in the Base Page class?
+A:
+"The Base Page contains common functionality needed by ALL page classes:
+
+Browser navigation methods
+Generic element interactions (click, fill, is_visible)
+Wait methods
+Screenshot utilities
+URL and title getters
+
+All page classes inherit fromContinue10:35 PMBasePage to avoid duplicating this code. For example, every page needs navigate() and is_visible(), so they're in BasePage."
+
+Q: Where should assertions be placed - in page classes or test classes?
+A:
+"Assertions should be in test classes, not page classes.
+Page classes perform actions: click, fill, navigate, get text.
+Test classes verify results: assert, check conditions, validate data.
+This follows the Single Responsibility Principle. Page classes describe 'how to interact with the page' while tests describe 'what the expected outcome is'."
+
+
+---------------------------------------------------------------------------------------------
+
+nterview Questions You Can Now Answer
+Q: What's the difference between Python assert and Playwright expect?
+A:
+"Python's assert checks immediately without waiting, which can cause flaky tests. For example:
+pythonassert element.is_visible()  # Fails immediately if not visible
+Playwright's expect() auto-waits up to 5 seconds by default:
+pythonexpect(element).to_be_visible()  # Waits up to 5 seconds
+This makes tests more stable because web elements often need time to load. I use expect() for web element assertions and assert only for simple data validations."
+
+Q: How does Playwright handle waits differently from Selenium?
+A:
+"Playwright has built-in auto-waiting for all actions. Before clicking, filling, or selecting, it automatically waits for the element to be:
+
+Attached to DOM
+Visible
+Stable (not animating)
+Enabled
+Not obscured
+
+In Selenium, you must write explicit waits manually using WebDriverWait and expected_conditions. This makes Playwright tests more reliable and require less code."
+
+Q: How do you handle flaky tests?
+A:
+"I prevent flaky tests by:
+
+Using Playwright's expect() instead of immediate assertions
+Increasing timeouts for slow operations: expect(element).to_be_visible(timeout=10000)
+Using stable locators (text content, data-testid) instead of fragile CSS selectors
+Waiting for network idle for SPA apps: page.goto(url, wait_until='networkidle')
+Using page.pause() to debug intermittent failures
+
+Playwright's auto-waiting eliminates most timing-related flakiness that's common in Selenium."
+
+Q: How do you debug a failing Playwright test?
+A:
+"I use several techniques:
+
+page.pause() - Opens Playwright Inspector to step through code
+Screenshots - page.screenshot(path='debug.png') to see page state
+Slow motion - launch(slow_mo=1000) to watch actions
+Headed mode - launch(headless=False) to see browser
+Codegen - playwright codegen <url> to find correct selectors
+Console logs - Print statements with -s flag in pytest
+
+
+
+With Git:
+
+✅ Complete history of every change
+✅ Work with multiple developers simultaneously
+✅ Easy rollback to any previous version
+✅ Code backed up remotely
+✅ Code review through pull requests
+✅ CI/CD integration (next step!
