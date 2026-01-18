@@ -13,7 +13,7 @@ def test_python_built_in_assertions():
     """
     
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False, slow_mo=300)
+        browser = playwright.chromium.launch(headless=True, slow_mo=300)
         context = browser.new_context()
         page = context.new_page()
         
@@ -115,7 +115,7 @@ def test_playwright_expect_assertions():
         print("✅ Page URL matches exactly")
         
         # 3. Page URL (contains)
-        expect(page).to_have_url(/.*demoqa.*/)  # Regex
+        expect(page).to_have_url(re.compile(".*demoqa.*"))  # Regex
         print("✅ Page URL contains 'demoqa'")
         
         

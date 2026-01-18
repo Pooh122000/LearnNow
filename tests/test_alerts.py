@@ -12,7 +12,7 @@ def test_handle_javascript_alert():
     """
     
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False, slow_mo=500)
+        browser = playwright.chromium.launch(headless=True, slow_mo=500)
         context = browser.new_context()
         page = context.new_page()
         
