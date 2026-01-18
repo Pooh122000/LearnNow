@@ -44,7 +44,7 @@ def test_verify_homepage_elements(page):
         
         # Step 6: Verify total cards count
         cards_count = home_page.get_cards_count()
-        assert cards_count == 10, f"Expected 6 cards, found {cards_count}"
+        assert cards_count == 6, f"Expected 6 cards, found {cards_count}"
         print(f"✅ Found {cards_count} category cards")
         
         # Cleanup
