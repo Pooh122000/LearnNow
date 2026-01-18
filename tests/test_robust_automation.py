@@ -6,7 +6,10 @@ def test_robust_automation(page):
     print("\n🧪 Starting Robust Text Box Test")
 
     # Navigate
-    page.goto("https://demoqa.com/text-box")
+    page.goto(
+    "https://demoqa.com/text-box",
+    wait_until="domcontentloaded",
+    timeout=60000)
     expect(page).to_have_url(re.compile(".*text-box.*"))
     print("✅ Navigated to Text Box page")
 
