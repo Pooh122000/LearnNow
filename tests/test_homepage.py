@@ -2,7 +2,7 @@
 Test Suite: Homepage Tests
 Description: Tests using Page Object Model pattern
 """
-
+import pytest
 from pages.home_page import HomePage
 
 def test_verify_homepage_elements(page):
