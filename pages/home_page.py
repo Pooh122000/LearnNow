@@ -3,7 +3,7 @@ Page Object Model: Home Page
 Description: Page object for DemoQA homepage
 """
 
-from playwright.sync_api import Page
+from playwright.sync_api import expect
 
 
 class HomePage:
