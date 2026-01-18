@@ -1,14 +1,8 @@
-from playwright.sync_api import sync_playwright
-
-
 def test_navigate_to_elements_page():
     """Test navigation to Elements page"""
     
-    with sync_playwright() as playwright:
-        def test_robust_automation(browser):
-            context = browser.new_context()
-            page = context.new_page()
-        
+    def test_robust_automation(page):
+        print("\n🧪 Starting Robust Text Box Test")
         # 1. Go to homepage
         page.goto("https://demoqa.com")
         
