@@ -35,8 +35,13 @@ jobs:
     - name: Install Playwright Browsers
       run: playwright install --with-deps ${{ matrix.browser }}
     
-    - name: Run Playwright tests on ${{ matrix.browser }}
-      run: pytest tests/ -v --browser=${{ matrix.browser }} --html=reports/report-${{ matrix.browser }}.html --self-contained-html
+    - name: Run tests on ${{ matrix.browser }}
+      env:
+        PLAYWRIGHT_BROWSER: ${{ matrix.browser }}
+      run: |
+        pytest tests/ -v \
+        --html=reports/report-${{ matrix.browser }}.html \
+        --self-contained-html
     
     - name: Upload test artifacts for ${{ matrix.browser }}
       if: always()
