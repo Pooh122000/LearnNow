@@ -34,7 +34,7 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="session")
 def browser_name(request):
     """Get browser name from command line or default to chromium"""
-    return request.config.getoption("--browser")
+    return os.getenv("PLAYWRIGHT_BROWSER", "chromium")
 
 
 @pytest.fixture(scope="session")
