@@ -39,9 +39,12 @@ jobs:
       env:
         PLAYWRIGHT_BROWSER: ${{ matrix.browser }}
       run: |
-        pytest tests/ -v \
-        --html=reports/report-${{ matrix.browser }}.html \
-        --self-contained-html
+        pytest tests/ \
+          --browser=${{ matrix.browser }} \
+          --html=reports/report-${{ matrix.browser }}.html \
+          --self-contained-html \
+          --reruns 2 \
+          --reruns-delay 3
     
     - name: Upload test artifacts for ${{ matrix.browser }}
       if: always()
