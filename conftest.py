@@ -11,14 +11,6 @@ from datetime import datetime
 
 
 # ========== COMMAND LINE OPTIONS ==========
-def pytest_addoption(parser):
-    parser.addoption(
-        "--headed",
-        action="store_true",
-        default=False,
-        help="Run tests in headed mode (LOCAL only)"
-    )
-
 
 # ========== BROWSER NAME FIXTURE ==========
 @pytest.fixture(scope="session")
@@ -34,7 +26,7 @@ def browser_name():
 @pytest.fixture(scope="session")
 def browser(request, browser_name):
     is_ci = os.getenv("CI") == "true"
-    headed_flag = request.config.getoption("--headed")
+    headed_flag = request.config.getoption("headed")
     headless = is_ci or not headed_flag
     slow_mo = 0 if headless else 300
 
