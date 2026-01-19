@@ -4,8 +4,10 @@ Description: Tests using Page Object Model pattern
 """
 import pytest
 import os
+from playwright.sync_api import expect
 from pages.home_page import HomePage
 
+@pytest.mark.smoke
 def test_verify_homepage_elements(page):
     """
     Test: Verify DemoQA homepage loads with all elements
@@ -52,7 +54,7 @@ def test_verify_homepage_elements(page):
         browser.close()
         print("✅ Test completed successfully!\n")
 
-
+@pytest.mark.smoke
 def test_navigate_to_elements_page(page):
     """
     Test: Navigate from homepage to Elements page
@@ -131,4 +133,34 @@ def test_debug_elements_page(page):
                 print(f"❌ {selector} - not found")
         except:
             print(f"❌ {selector} - error/timeout")
+            
+            
+@pytest.mark.regression
+def test_all_category_cards_visible(page):
+    """
+    Test: Verify all 6 category cards are visible on homepage
+    """
+    print("\n🧪 Starting test: All Category Cards Visible")
+    
+    from pages.home_page import HomePage
+    
+    home_page = HomePage(page)
+    home_page.open()
+    
+    # List of expected cards
+    expected_cards = [
+        "Elements",
+        "Forms",
+        "Alerts, Frame & Windows",
+        "Widgets",
+        "Interactions",
+        "Book Store Application"
+    ]
+    
+    # Verify each card
+    for card_name in expected_cards:
+        card = page.locator(f"text={card_name}")
+        expect(card).to_be_visible()
+        print(f"✅ '{card_name}' card is visible")
+
     

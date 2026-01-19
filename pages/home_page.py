@@ -38,7 +38,12 @@ class HomePage:
     
     def is_banner_visible(self):
         """Check if banner is visible"""
-        return self.page.locator(self.banner).is_visible()
+        banner = self.page.locator(".home-banner img")
+        try:
+            banner.wait_for(state="visible", timeout=10000)
+            return True
+        except:
+            return False
     
     def is_elements_card_visible(self):
         """Check if Elements card is visible"""

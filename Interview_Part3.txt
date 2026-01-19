@@ -1,0 +1,100 @@
+</details>
+
+---
+
+## 📝 Interview Questions You Can Now Answer
+
+**Q: What is CI/CD and why is it important in QA automation?**
+
+**A:**
+"CI/CD stands for Continuous Integration and Continuous Deployment. In QA automation:
+
+**Continuous Integration** means tests run automatically on every code change. This:
+- Catches bugs immediately after code is written
+- Prevents broken code from being merged
+- Ensures code works on clean environments, not just locally
+- Provides fast feedback to developers
+
+**Benefits for QA:**
+- No manual test execution needed
+- Tests run on every push/PR automatically
+- Consistent environment (no 'works on my machine' issues)
+- Team sees test results in real-time
+- Failed tests block deployment to production
+
+I implement CI/CD using GitHub Actions, where tests run on Ubuntu with headless browsers on every push and pull request."
+
+---
+
+**Q: Explain your GitHub Actions workflow for running Playwright tests.**
+
+**A:**
+"My workflow has these steps:
+
+1. **Trigger:** Runs on push to main and on pull requests
+2. **Setup:** Uses Ubuntu latest with Python 3.11
+3. **Install:** Installs dependencies from requirements.txt and Playwright browsers
+4. **Execute:** Runs pytest with verbose output
+5. **Artifacts:** Uploads screenshots and HTML reports if tests fail
+6. **Timeout:** Cancels after 60 minutes to prevent hanging
+
+The workflow ensures every code change is tested in a clean, consistent environment before merging. If tests fail, I can download artifacts to debug the issue."
+
+---
+
+**Q: What do you do when tests pass locally but fail in CI?**
+
+**A:**
+"I troubleshoot systematically:
+
+1. **Check logs:** Review full CI logs for error details
+2. **Environment differences:** CI is Ubuntu/headless, local might be Windows/headed
+3. **Timing issues:** CI machines can be slower - I increase timeouts
+4. **Dependencies:** Verify all dependencies installed correctly
+5. **Test in similar environment:** Run tests locally with `headless=True`
+6. **Artifacts:** Download screenshots from CI to see what failed
+
+Common fixes:
+- Increase element wait timeouts
+- Add `playwright install --with-deps` for system dependencies
+- Ensure tests don't rely on Windows-specific paths
+- Use stable locators that work cross-platform"
+
+---
+
+**Q: How do you handle test failures in your CI pipeline?**
+
+**A:**
+"When tests fail in CI:
+
+1. **Immediate visibility:** CI shows red X on PR - blocks merging
+2. **Review logs:** Click 'Details' to see which tests failed and why
+3. **Download artifacts:** Screenshots and HTML reports help debug
+4. **Fix locally:** Reproduce issue, fix code, verify locally
+5. **Push fix:** New commit triggers CI again
+6. **Verify:** Green checkmark means safe to merge
+
+For frequent failures (flaky tests):
+- Increase timeouts
+- Use Playwright's auto-waiting
+- Add retries: `pytest --reruns 2`
+- Fix root cause rather than ignoring
+
+Status badges on README show team if main branch is healthy."
+
+---
+
+## 🎯 What's Next?
+
+Once you confirm Step 8 is complete, I'll move to **STEP 9: Real-Life CI/CD Scenarios** where we'll:
+- Handle flaky tests in pipeline
+- Set up parallel test execution
+- Configure test retries
+- Optimize CI performance
+- Set up different environments (staging, production)
+- Advanced artifact management
+- Real-world troubleshooting scenarios
+
+**This is where you learn the advanced tricks used in production!** 🔥
+------------------------------------------------------------------------------
+
