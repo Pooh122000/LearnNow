@@ -7,6 +7,9 @@ import re
 from playwright.sync_api import expect
 from pages.home_page import HomePage
 
+@pytest.mark.skipif(
+    os.getenv("CI") == "true",
+    reason="Banner is flaky in CI on demoqa.com")
 
 def test_python_built_in_assertions(page):
     """

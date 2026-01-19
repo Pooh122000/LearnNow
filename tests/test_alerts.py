@@ -49,7 +49,9 @@ def test_handle_confirmation_dialog(page):
     page.on("dialog", handle_dialog)
     
     # Click confirmation button
-    page.click("#confirmButton")
+    confirm_btn = page.locator("#confirmButton")
+    confirm_btn.wait_for(state="visible", timeout=15000)
+    confirm_btn.click()
     
     # Verify we got the dialog
     assert dialog_message is not None, "Dialog did not appear"
