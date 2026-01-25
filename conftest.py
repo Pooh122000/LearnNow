@@ -129,3 +129,24 @@ def pytest_sessionfinish(session, exitstatus):
 def pytest_runtest_protocol(item, nextitem):
     print(f"\n▶️ Running: {item.name}")
     yield
+
+
+# ===============================
+# API REQUEST FIXTURE (PLAYWRIGHT)
+# ===============================
+
+@pytest.fixture(scope="session")
+def api_request():
+    """
+    Provides a Playwright APIRequestContext for API testing.
+    Isolated from browser/page fixtures.
+    """
+    with sync_playwright() as p:
+        request_context = p.request.new_context(
+            base_url=os.getenv("API_BASE_URL", "https://demoqa.com"),
+            extra_http_headers={
+                "Content-Type": "application/json"
+            }
+        )
+        yield request_context
+        request_context.dispose()
