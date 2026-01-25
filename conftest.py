@@ -5,6 +5,7 @@ Stable for Chromium, Firefox, WebKit (Local + CI)
 
 import os
 import pytest
+import requests
 from playwright.sync_api import sync_playwright
 from pathlib import Path
 from datetime import datetime
@@ -138,15 +139,22 @@ def pytest_runtest_protocol(item, nextitem):
 @pytest.fixture(scope="session")
 def api_request():
     """
-    Provides a Playwright APIRequestContext for API testing.
-    Isolated from browser/page fixtures.
+    Simple requests-based API client.
+    Stable, fast, CI-safe.
     """
-    with sync_playwright() as p:
-        request_context = p.request.new_context(
-            base_url=os.getenv("API_BASE_URL", "https://demoqa.com"),
-            extra_http_headers={
-                "Content-Type": "application/json"
-            }
-        )
-        yield request_context
-        request_context.dispose()
+    base_url = os.getenv("API_BASE_URL", "https://demoqa.com")
+
+    class APIClient:
+        def get(self, path, **kwargs):
+            return requests.get(f"{base_url}{path}", **kwargs)
+
+        def post(self, path, **kwargs):
+            return requests.post(f"{base_url}{path}", **kwargs)
+
+        def put(self, path, **kwargs):
+            return requests.put(f"{base_url}{path}", **kwargs)
+
+        def delete(self, path, **kwargs):
+            return requests.delete(f"{base_url}{path}", **kwargs)
+
+    return APIClient()

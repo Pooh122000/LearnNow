@@ -3,7 +3,7 @@ Forms Page Object
 Contains locators and methods for DemoQA Practice Form page
 """
 
-from pages.base_page import BasePage
+from ui_tests.pages.base_page import BasePage
 
 
 class FormsPage(BasePage):

@@ -1,0 +1,55 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    
+    # Matrix strategy - run tests on multiple browsers
+    strategy:
+      fail-fast: false  # Don't cancel other jobs if one fails
+      matrix:
+        browser: [chromium, firefox, webkit]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Playwright Browsers
+      run: playwright install --with-deps ${{ matrix.browser }}
+    
+    - name: Run tests on ${{ matrix.browser }}
+      env:
+        PLAYWRIGHT_BROWSER: ${{ matrix.browser }}
+      run: |
+        pytest tests/ \
+          --browser=${{ matrix.browser }} \
+          --html=reports/report-${{ matrix.browser }}.html \
+          --self-contained-html \
+          --reruns 2 \
+          --reruns-delay 3
+    
+    - name: Upload test artifacts for ${{ matrix.browser }}
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report-${{ matrix.browser }}
+        path: reports/ui-report-${{ matrix.browser }}.html
+        

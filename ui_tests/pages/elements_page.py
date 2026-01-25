@@ -2,7 +2,7 @@
 Elements Page Object
 Contains locators and methods for DemoQA Elements page
 """
-from pages.base_page import BasePage
+from ui_tests.pages.base_page import BasePage
 
 
 class ElementsPage(BasePage):
