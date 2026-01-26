@@ -39,7 +39,7 @@ jobs:
       env:
         PLAYWRIGHT_BROWSER: ${{ matrix.browser }}
       run: |
-        pytest tests/ \
+        pytest \
           --browser=${{ matrix.browser }} \
           --html=reports/report-${{ matrix.browser }}.html \
           --self-contained-html \
